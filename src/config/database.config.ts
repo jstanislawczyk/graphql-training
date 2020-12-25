@@ -10,13 +10,19 @@ export class DatabaseConfig {
       synchronize: true,
       logging: false,
       entities: [
-        'src/models/**/*.ts',
+        process.env.IS_DEV
+          ? 'src/models/**/*.ts'
+          : 'build/src/models/**/*.js',
       ],
       migrations: [
-        'src/migration/**/*.ts',
+        process.env.IS_DEV
+          ? 'src/migration/**/*.ts'
+          : 'build/src/migration/**/*.js',
       ],
       subscribers: [
-        'src/subscriber/**/*.ts',
+        process.env.IS_DEV
+          ? 'src/subscriber/**/*.ts'
+          : 'build/src/subscriber/**/*.js',
       ],
       cli: {
         entitiesDir: 'src/models',

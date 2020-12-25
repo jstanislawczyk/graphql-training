@@ -1,5 +1,10 @@
+# Common
+build
+node_modules
+
 # IDE
 .idea
+.vscode
 
 # Logs
 logs
@@ -23,8 +28,6 @@ coverage
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directories
-node_modules/
 # TypeScript v1 declaration files
 typings/
 
