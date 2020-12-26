@@ -19,15 +19,16 @@
     "lint": "eslint . --ext .ts",
     "start:dev": "EXPORT IS_DEV=true && nodemon -w src --ext ts --exec ts-node src/index.ts",
     "start:dev:windows": "SET IS_DEV=true && nodemon -w src --ext ts --exec ts-node src/index.ts",
-    "test:api": "npm run compile && mocha './build/test/graphql/**.spec.js' --timeout 15000"
+    "test:api": "EXPORT NODE_ENV=test && npm run compile && mocha './build/test/graphql/**.spec.js' --timeout 15000 --exit",
+    "test:api:windows": "SET NODE_ENV=test && npm run compile && mocha './build/test/graphql/**.spec.js' --timeout 15000 --exit"
   },
   "dependencies": {
     "apollo-server": "^2.19.0",
     "class-validator": "^0.12.2",
     "config": "^3.3.3",
     "graphql": "^15.4.0",
+    "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
-    "sqlite3": "^5.0.0",
     "type-graphql": "^1.1.1",
     "typedi": "^0.8.0",
     "typeorm": "^0.2.29",
@@ -38,6 +39,7 @@
     "@types/chai-as-promised": "^7.1.3",
     "@types/config": "0.0.37",
     "@types/mocha": "^8.2.0",
+    "@types/mysql": "^2.15.16",
     "@types/sinon": "^9.0.10",
     "@types/sinon-chai": "^3.2.5",
     "@types/supertest": "^2.0.10",

@@ -27,12 +27,14 @@ describe('Books', () => {
     `;
 
     // Act & Assert
-    const response = await request(application.serverInfo.url)
+    await request(application.serverInfo.url)
       .post('/graphql')
       .send({ query })
-      .expect(200);
-
-    console.log(response);
+      .expect(200, {
+        data: {
+          books: [],
+        },
+      });
   });
 });
 

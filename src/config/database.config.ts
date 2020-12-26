@@ -7,9 +7,13 @@ export class DatabaseConfig {
     const isDev: boolean = config.get('common.isDev');
 
     return <ConnectionOptions> {
-      type: 'sqlite',
-      database: './db.sqlite3',
+      type: 'mysql',
       synchronize: true,
+      host: config.get('mysql.url'),
+      port: config.get('mysql.port'),
+      username: config.get('mysql.username'),
+      password: config.get('mysql.password'),
+      database: config.get('mysql.database'),
       logging: false,
       entities: [
         isDev
