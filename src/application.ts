@@ -5,6 +5,7 @@ import {Container} from 'typedi';
 import {GraphQLSchema} from 'graphql';
 import {DatabaseConfig} from './config/database.config';
 import config from 'config';
+import {Logger} from './common/logger';
 
 export class Application {
 
@@ -30,12 +31,12 @@ export class Application {
     this.server = new ApolloServer({ schema });
     this.serverInfo = await this.server.listen(4000);
 
-    console.log(`Server has started: ${this.serverInfo.url}`);
+    Logger.log(`Server has started: ${this.serverInfo.url}`);
   }
 
   public async close(): Promise<void> {
     await this.server.stop();
 
-    console.log('Server closed');
+    Logger.log('Server closed');
   }
 }

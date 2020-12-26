@@ -18,9 +18,9 @@
     "compile": "tsc",
     "lint": "eslint . --ext .ts",
     "start:dev": "EXPORT IS_DEV=true && nodemon -w src --ext ts --exec ts-node src/index.ts",
-    "start:dev:windows": "SET IS_DEV=true && nodemon -w src --ext ts --exec ts-node src/index.ts",
+    "start:dev:windows": "SET \"IS_DEV=true\" && nodemon -w src --ext ts --exec ts-node src/index.ts",
     "test:api": "EXPORT NODE_ENV=test && npm run compile && mocha './build/test/graphql/**.spec.js' --timeout 15000 --exit",
-    "test:api:windows": "SET NODE_ENV=test && npm run compile && mocha './build/test/graphql/**.spec.js' --timeout 15000 --exit"
+    "test:api:windows": "SET \"NODE_ENV=test\" && npm run compile && mocha './build/test/graphql/**.spec.js' --timeout 15000 --exit"
   },
   "dependencies": {
     "apollo-server": "^2.19.0",
@@ -32,7 +32,8 @@
     "type-graphql": "^1.1.1",
     "typedi": "^0.8.0",
     "typeorm": "^0.2.29",
-    "typeorm-typedi-extensions": "^0.2.3"
+    "typeorm-typedi-extensions": "^0.2.3",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/chai": "^4.2.14",
@@ -43,6 +44,8 @@
     "@types/sinon": "^9.0.10",
     "@types/sinon-chai": "^3.2.5",
     "@types/supertest": "^2.0.10",
+    "@types/uuid": "^8.3.0",
+    "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
     "chai": "^4.2.0",
@@ -54,6 +57,7 @@
     "sinon-chai": "^3.5.0",
     "supertest": "^6.0.1",
     "ts-node": "^9.1.1",
-    "typescript": "^4.1.2"
+    "typescript": "^4.1.2",
+    "uuid": "^8.3.2"
   }
 }
