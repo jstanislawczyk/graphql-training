@@ -23,7 +23,7 @@ export class Logger {
             winston.format.label({
               label: '[GraphQlTraining]',
             }),
-            winston.format.printf(({ label, message}) =>
+            winston.format.printf(({ label, message }) =>
               `${label} ${message}`
             ),
             winston.format.colorize({
