@@ -16,6 +16,7 @@
   "homepage": "https://github.com/jstanislawczyk/graphql-training#readme",
   "scripts": {
     "compile": "tsc",
+    "lint": "eslint . --ext .ts",
     "start:dev": "EXPORT IS_DEV=true && nodemon -w src --ext ts --exec ts-node src/index.ts",
     "start:dev:windows": "SET IS_DEV=true && nodemon -w src --ext ts --exec ts-node src/index.ts",
     "test:api": "npm run compile && mocha './build/test/graphql/**.spec.js' --timeout 15000"
@@ -40,8 +41,11 @@
     "@types/sinon": "^9.0.10",
     "@types/sinon-chai": "^3.2.5",
     "@types/supertest": "^2.0.10",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "eslint": "^7.16.0",
     "mocha": "^8.2.1",
     "nodemon": "^2.0.6",
     "sinon": "^9.2.2",

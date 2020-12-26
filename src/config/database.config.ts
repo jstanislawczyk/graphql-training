@@ -1,8 +1,10 @@
 import {ConnectionOptions} from 'typeorm';
+import config from 'config';
 
 export class DatabaseConfig {
 
   public static getDatabaseConnectionConfiguration(): ConnectionOptions {
+    const isDev: boolean = config.get('common.isDev');
 
     return <ConnectionOptions> {
       type: 'sqlite',
@@ -10,17 +12,17 @@ export class DatabaseConfig {
       synchronize: true,
       logging: false,
       entities: [
-        process.env.IS_DEV
+        isDev
           ? 'src/models/**/*.ts'
           : 'build/src/models/**/*.js',
       ],
       migrations: [
-        process.env.IS_DEV
+        isDev
           ? 'src/migration/**/*.ts'
           : 'build/src/migration/**/*.js',
       ],
       subscribers: [
-        process.env.IS_DEV
+        isDev
           ? 'src/subscriber/**/*.ts'
           : 'build/src/subscriber/**/*.js',
       ],

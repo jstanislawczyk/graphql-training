@@ -3,7 +3,7 @@ import {Application} from '../../src/application';
 
 describe('Books', () => {
 
-  let application: Application = new Application();
+  const application: Application = new Application();
 
   before(async () => {
     await application.bootstrap();

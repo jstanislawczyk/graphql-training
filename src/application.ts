@@ -4,6 +4,7 @@ import {buildSchema} from 'type-graphql';
 import {Container} from 'typedi';
 import {GraphQLSchema} from 'graphql';
 import {DatabaseConfig} from './config/database.config';
+import config from 'config';
 
 export class Application {
 
@@ -16,9 +17,10 @@ export class Application {
     useContainer(Container);
     await createConnection(databaseConfig);
 
+    const isDev: boolean = config.get('common.isDev');
     const schema: GraphQLSchema = await buildSchema({
       resolvers: [
-        process.env.IS_DEV
+        isDev
           ? `${__dirname}/resolvers/**/*.ts`
           : `${__dirname}/resolvers/**/*.js`,
       ],
