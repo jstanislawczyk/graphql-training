@@ -22,8 +22,8 @@ export class Application {
     const schema: GraphQLSchema = await buildSchema({
       resolvers: [
         isDev
-          ? `${__dirname}/resolvers/**/*.ts`
-          : `${__dirname}/resolvers/**/*.js`,
+          ? `${__dirname}/resolvers/**/*.resolver.ts`
+          : `${__dirname}/resolvers/**/*.resolver.js`,
       ],
       container: Container,
     });
