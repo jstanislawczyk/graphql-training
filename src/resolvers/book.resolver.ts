@@ -15,6 +15,6 @@ export class BookResolver {
   public async books(): Promise<Book[]> {
     Logger.log('Fetching all books');
 
-    return await this.bookService.getAll();
+    return await this.bookService.findAll();
   }
 }

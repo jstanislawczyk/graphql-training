@@ -10,7 +10,7 @@ export class BookService {
   ) {
   }
 
-  public async getAll(): Promise<Book[]> {
+  public async findAll(): Promise<Book[]> {
     return this.bookRepository.find();
   }
 }
