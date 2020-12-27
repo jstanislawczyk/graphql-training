@@ -3,7 +3,7 @@ import {application} from '../hooks/application-hook';
 import {BookUtils} from '../utils/database-utils/book.utils';
 import {Book} from '../../src/models/book';
 import {book, fullBook} from '../fixtures/book.fixture';
-import { expect } from 'chai';
+import {expect} from 'chai';
 
 describe('Books', () => {
 

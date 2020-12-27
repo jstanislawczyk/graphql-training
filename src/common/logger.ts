@@ -10,9 +10,10 @@ export class Logger {
       this.initLogger();
     }
 
-    this.logger.log(level, {
-     message,
-    });
+    this.logger.log(
+      level,
+      message,
+    );
   }
 
   private static initLogger(): void {

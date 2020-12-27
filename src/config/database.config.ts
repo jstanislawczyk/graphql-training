@@ -14,7 +14,7 @@ export class DatabaseConfig {
       username: config.get('mysql.username'),
       password: config.get('mysql.password'),
       database: config.get('mysql.database'),
-      logging: false,
+      logging: config.get('mysql.logging'),
       entities: [
         isDev
           ? 'src/models/**/*.ts'
