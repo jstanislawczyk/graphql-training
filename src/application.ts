@@ -19,6 +19,7 @@ export class Application {
     await createConnection(databaseConfig);
 
     const isDev: boolean = config.get('common.isDev');
+    const applicationPort: number = config.get('server.port');
     const schema: GraphQLSchema = await buildSchema({
       resolvers: [
         isDev
@@ -29,7 +30,7 @@ export class Application {
     });
 
     this.server = new ApolloServer({ schema });
-    this.serverInfo = await this.server.listen(4000);
+    this.serverInfo = await this.server.listen(applicationPort);
 
     Logger.log(`Server has started: ${this.serverInfo.url}`);
   }

@@ -1,4 +1,7 @@
 export default {
+    server: {
+      port: process.env.SERVER_PORT || 4000,
+    },
     common: {
         isDev: Boolean(process.env.IS_DEV) || false,
     },
