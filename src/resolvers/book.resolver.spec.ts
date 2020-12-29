@@ -35,7 +35,7 @@ describe('BookResolver', () => {
       bookService.findAll.resolves([]);
 
       // Act
-      const books: Book[] = await bookResolver.books();
+      const books: Book[] = await bookResolver.getBooks();
 
       // Assert
       expect(books).to.be.empty;
@@ -49,7 +49,7 @@ describe('BookResolver', () => {
       ]);
 
       // Act
-      const books: Book[] = await bookResolver.books();
+      const books: Book[] = await bookResolver.getBooks();
 
       // Assert
       expect(books).to.have.length(2);
@@ -62,7 +62,7 @@ describe('BookResolver', () => {
       bookService.findAll.rejects(new Error('FindAll error'));
 
       // Act
-      const booksResponse: Promise<Book[]> = bookResolver.books();
+      const booksResponse: Promise<Book[]> = bookResolver.getBooks();
 
       // Assert
       await expect(booksResponse).to.eventually.be.rejectedWith('FindAll error');

@@ -15,7 +15,7 @@ describe('Books', () => {
     // Arrange
     const query: string = `
       {
-        books {
+        getBooks {
             id,
             title,
             author,
@@ -30,7 +30,7 @@ describe('Books', () => {
       .send({ query })
       .expect(200, {
         data: {
-          books: [],
+          getBooks: [],
         },
       });
   });
@@ -39,7 +39,7 @@ describe('Books', () => {
     // Arrange
     const query: string = `
       {
-        books {
+        getBooks {
             id,
             title,
             author,
@@ -58,7 +58,7 @@ describe('Books', () => {
       .send({ query })
       .expect(200);
 
-    const returnedBooks: Book[] = response.body.data.books as Book[];
+    const returnedBooks: Book[] = response.body.data.getBooks as Book[];
 
     expect(returnedBooks).to.have.length(2);
     expect(returnedBooks[0].id).to.be.eql(String(savedBooks[0].id));
