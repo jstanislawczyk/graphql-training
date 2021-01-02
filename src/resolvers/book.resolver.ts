@@ -22,12 +22,12 @@ export class BookResolver {
   }
 
   @Query(() => Book)
-  public async getBookById(@Arg('id') id: number) {
+  public async getBookById(@Arg('id') id: number): Promise<Book> {
     return this.bookService.findOne(id);
   }
 
   @Mutation(() => Book)
-  public async createBook(@Arg('createBookInput') createBookInput: CreateBookInput): Promise<Book> {
+  public async saveBook(@Arg('createBookInput') createBookInput: CreateBookInput): Promise<Book> {
     const book: Book = {
       author: createBookInput.author,
       title: createBookInput.title,
@@ -46,7 +46,7 @@ export class BookResolver {
   }
 
   @Mutation(() => Boolean)
-  async deleteBookById(@Arg('id') id: number) {
+  public async deleteBookById(@Arg('id') id: number): Promise<boolean> {
     const deleteResult: DeleteResult = await this.bookService.deleteById(id);
 
     return deleteResult.affected === 1;
