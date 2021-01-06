@@ -36,6 +36,8 @@ export class Application {
   }
 
   public async close(): Promise<void> {
+    Logger.log('Closing server');
+
     await this.server.stop();
 
     Logger.log('Server closed');
