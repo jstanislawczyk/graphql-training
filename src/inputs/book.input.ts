@@ -1,14 +1,18 @@
-import { InputType, Field } from "type-graphql";
+import {InputType, Field} from 'type-graphql';
+import {IsBoolean, IsString} from 'class-validator';
 
 @InputType()
 export class CreateBookInput {
 
   @Field()
-  title: string;
+  @IsString()
+  public title: string;
 
   @Field()
-  author: string;
+  @IsString()
+  public author: string;
 
   @Field()
-  isPublished: boolean;
+  @IsBoolean()
+  public isPublished: boolean;
 }
