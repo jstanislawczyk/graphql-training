@@ -7,6 +7,10 @@ export class BookUtils {
     return this.getBookRepository().find();
   }
 
+  public static getBookById(id: number): Promise<Book | undefined> {
+    return this.getBookRepository().findOne({ id });
+  }
+
   public static saveBook(book: Book): Promise<Book> {
     return this.getBookRepository().save(book);
   }

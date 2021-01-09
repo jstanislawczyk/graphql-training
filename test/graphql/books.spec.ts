@@ -5,6 +5,7 @@ import {Book} from '../../src/models/book';
 import {book, fullBook} from '../fixtures/book.fixture';
 import {expect} from 'chai';
 import {CreateBookInput} from '../../src/inputs/book.input';
+import {UpdateBookInput} from '../../src/inputs/update-book.input';
 
 describe('Books', () => {
 
@@ -209,6 +210,121 @@ describe('Books', () => {
       expect(returnedBook.title).to.be.eql(savedBooks[0].title);
       expect(returnedBook.author).to.be.eql(savedBooks[0].author);
       expect(returnedBook.isPublished).to.be.eql(savedBooks[0].isPublished);
+    });
+  });
+
+  describe('updateBook', () => {
+    it('should not find book', async () => {
+      // Arrange
+      const createBookInput: UpdateBookInput = {
+        isPublished: true,
+      };
+
+      const query: string = `
+        mutation {
+          updateBook (
+            id: 1,
+            updateBookInput: {
+              isPublished: ${createBookInput.isPublished}
+            }
+          ) {
+            id,
+            author,
+            title,
+            isPublished
+          }
+        }
+      `;
+
+      // Act & Assert
+      await request(application.serverInfo.url)
+        .post('/graphql')
+        .send({ query })
+        .expect(200);
+    });
+
+    it('should update book', async () => {
+      // Arrange
+      const savedBook: Book = await BookUtils.saveBook(fullBook);
+      const updateBookInput: UpdateBookInput = {
+        title: 'test_title',
+        author: 'test_author',
+        isPublished: false,
+      };
+
+      const query: string = `
+        mutation {
+          updateBook (
+            id: ${savedBook.id},
+            updateBookInput: {
+              isPublished: ${updateBookInput.isPublished},
+              title: "${updateBookInput.title}",
+              author: "${updateBookInput.author}"
+            }
+          ) {
+            id,
+            author,
+            title,
+            isPublished
+          }
+        }
+      `;
+
+      // Act & Assert
+      const response: Response = await request(application.serverInfo.url)
+        .post('/graphql')
+        .send({ query })
+        .expect(200);
+
+      const savedBooks: Book[] = await BookUtils.getAllBooks();
+      const returnedUpdatedBook: Book = response.body.data.updateBook as Book;
+
+      expect(savedBooks).to.have.length(1);
+      expect(returnedUpdatedBook.id).to.be.eql(String(savedBooks[0].id));
+      expect(returnedUpdatedBook.title).to.be.eql(savedBooks[0].title);
+      expect(returnedUpdatedBook.author).to.be.eql(savedBooks[0].author);
+      expect(returnedUpdatedBook.isPublished).to.be.eql(savedBooks[0].isPublished);
+    });
+  });
+
+  describe('deleteBookById', () => {
+    it('should not find book', async () => {
+      // Arrange
+      const query: string = `
+        mutation {
+          deleteBookById(id: 1)
+        }
+      `;
+
+      // Act & Assert
+      await request(application.serverInfo.url)
+        .post('/graphql')
+        .send({ query })
+        .expect(200, {
+          data: {
+            deleteBookById: false,
+          },
+        });
+    });
+
+    it('should delete book', async () => {
+      // Arrange
+      const savedBook: Book = await BookUtils.saveBook(fullBook);
+      const query: string = `
+        mutation {
+          deleteBookById(id: ${savedBook.id})
+        }
+      `;
+
+      // Act & Assert
+      await request(application.serverInfo.url)
+        .post('/graphql')
+        .send({ query })
+        .expect(200, {
+          data: {
+            deleteBookById: true,
+          },
+        });
     });
   });
 });
