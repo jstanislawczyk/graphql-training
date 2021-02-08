@@ -33,7 +33,7 @@ Default GraphQL endpoint is `http://localhost:4000/graphql` `(POST)` <br />
 Sample query:
 ```
 {
-    books {
+    getBooks {
         id,
         title,
         author,
